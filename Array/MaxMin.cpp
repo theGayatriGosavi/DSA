@@ -6,16 +6,54 @@
 */
 #include<iostream>
 using namespace std;
+struct pair
+{
+    int min;
+    int max;
+};
+struct pair getminmax(int arr[], int low, int high)
+{
+   struct pair minmax, mml, mmr;
+   int mid;
+   if(high==low) // one element in array
+   {
+      minmax.min=arr[low];
+      minmax.max=arr[low];
+      return minmax;
+   }
+   else
+   if (high==low+1) // two elements in array
+   {
+      if (arr[low]<arr[high])
+        {minmax.min=arr[low];
+         minmax.max=arr[high];}
+      else
+        {minmax.min=arr[high];
+         minmax.max=arr[low];}
+      return minmax;
+   }
+   // more than two elements
+   mid=(high+low)/2;
+   mml=getminmax(arr,low,mid);
+   mmr=getminmax(arr,mid+1,high);
+   //comparing minimums of two parts
+   if(mml.min<mmr.min)
+     minmax.min=mml.min;
+   else 
+     minmax.min=mmr.min;
+   //comparing maximums of two parts
+   if(mml.max<mmr.max)
+     minmax.max=mmr.max;
+   else 
+     minmax.max=mml.max;
+   return minmax;
+}
 int main()
 {
-    int n,temp=0;
-    cout<<"Enter size of array"<<endl;
-    cin<<n;
-    cout<<"Enter elements of array"<<endl;
-    for(int i=0;i<n;i++)
-        cin>>arr[i];
-    for (int i=0;i<n;i++)
-    {
-    }
-    
+    int arr={3,5,4,1,9};
+    int arr_size=5;
+    struct pair minmax = getminmax(arr,0,arr_size-1);
+    cout<<"Minimum element is:"<<minmax.min<<endl;
+    cout<<"Maximum element is"<<minmax.max;
+    return 0;
 }
