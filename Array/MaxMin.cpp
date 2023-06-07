@@ -6,14 +6,14 @@
 */
 #include<iostream>
 using namespace std;
-struct pair
+struct Pair
 {
     int min;
     int max;
 };
-struct pair getminmax(int arr[], int low, int high)
+struct Pair getMinMax(int arr[], int low, int high)
 {
-   struct pair minmax, mml, mmr;
+   struct Pair minmax, mml, mmr;
    int mid;
    if(high==low) // one element in array
    {
@@ -34,8 +34,8 @@ struct pair getminmax(int arr[], int low, int high)
    }
    // more than two elements
    mid=(high+low)/2;
-   mml=getminmax(arr,low,mid);
-   mmr=getminmax(arr,mid+1,high);
+   mml=getMinMax(arr,low,mid);
+   mmr=getMinMax(arr,mid+1,high);
    //comparing minimums of two parts
    if(mml.min<mmr.min)
      minmax.min=mml.min;
@@ -50,10 +50,10 @@ struct pair getminmax(int arr[], int low, int high)
 }
 int main()
 {
-    int arr={3,5,4,1,9};
+    int arr[]={3,5,4,1,9};
     int arr_size=5;
-    struct pair minmax = getminmax(arr,0,arr_size-1);
-    cout<<"Minimum element is:"<<minmax.min<<endl;
-    cout<<"Maximum element is"<<minmax.max;
+    struct Pair minmax = getMinMax(arr,0,arr_size-1);
+    cout<<"Minimum element is: "<<minmax.min<<endl;
+    cout<<"Maximum element is: "<<minmax.max;
     return 0;
 }
